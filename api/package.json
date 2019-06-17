@@ -1,0 +1,20 @@
+{
+    "name": "testresthapi",
+    "version": "1.0.0",
+    "private": true,
+    "main": "server.js",
+    "license": "MIT",
+    "dependencies": {
+        "hapi": "^17.6.0",
+        "mongoose": "^5.2.13",
+        "rest-hapi": "^1.5.0"
+    },
+    "devDependencies": {
+        "nodemon": "^1.18.4",
+        "dotenv-safe": "^6.0.0"
+    },
+    "scripts": {
+        "dev": "nodemon ./server.js localhost 9000",
+        "start": "node ./server.js"
+    }
+}
