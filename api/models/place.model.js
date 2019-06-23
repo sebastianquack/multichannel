@@ -15,23 +15,38 @@ module.exports = function (mongoose) {
       type: Types.Number,
       unique: true
     },
-    audio1_id: {
-      type: Types.String,
-      unique: false
+    audio1: {
+      type: Types.ObjectId,
+      ref: "file"
     },
-    audio2_id: {
-      type: Types.String,
-      unique: false
+    audio2: {
+      type: Types.ObjectId,
+      ref: "file"
     },
-    audio3_id: {
-      type: Types.String,
-      unique: false
-    },
+    audio3: {
+      type: Types.ObjectId,
+      ref: "file"
+    }
   });
   
   Schema.statics = {
     collectionName: modelName,
-    routeOptions: {}
+    routeOptions: {
+      associations: {
+        audio1: {
+          type: "ONE_ONE",
+          model: "file"
+        },
+        audio2: {
+          type: "ONE_ONE",
+          model: "file"
+        },
+        audio3: {
+          type: "ONE_ONE",
+          model: "file"
+        }
+      }
+    }
   };
   
   return Schema;

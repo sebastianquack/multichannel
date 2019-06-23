@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import MapPage from './MapPage.js'
 import PlacePage from './PlacePage.js'
 
-
 import axios from 'axios';
 
 class BaseContainer extends Component {

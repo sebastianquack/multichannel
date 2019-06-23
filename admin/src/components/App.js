@@ -44,15 +44,15 @@ const PlaceForm =
         
         <LocationInput/>
         
-        <ReferenceInput label="audio 1" source="audio1_id" reference="file">
+        <ReferenceInput label="audio 1" source="audio1" reference="file">
           <SelectInput optionText="filename" />
         </ReferenceInput>
 
-        <ReferenceInput label="audio 2" source="audio2_id" reference="file">
+        <ReferenceInput label="audio 2" source="audio2" reference="file">
           <SelectInput optionText="filename" />
         </ReferenceInput>
 
-        <ReferenceInput label="audio 3" source="audio3_id" reference="file">
+        <ReferenceInput label="audio 3" source="audio3" reference="file">
           <SelectInput optionText="filename" />
         </ReferenceInput>
         
