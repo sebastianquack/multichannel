@@ -1,23 +1,32 @@
 module.exports = function (mongoose) {
-  let modelName = "user";
+  let modelName = "place";
   let Types = mongoose.Schema.Types;
   let Schema = new mongoose.Schema({
-    username: {
+    name: {
       type: Types.String,
       required: true,
+      unique: false
+    },
+    lat: {
+      type: Types.Number,
       unique: true
     },
-    email: {
-      type: Types.String,
-      required: true,
+    lon: {
+      type: Types.Number,
       unique: true
     },
-    password: {
+    audio1_id: {
       type: Types.String,
-      required: true,
-      exclude: true,
-      allowOnUpdate: false
-    }
+      unique: false
+    },
+    audio2_id: {
+      type: Types.String,
+      unique: false
+    },
+    audio3_id: {
+      type: Types.String,
+      unique: false
+    },
   });
   
   Schema.statics = {

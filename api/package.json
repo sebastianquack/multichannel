@@ -5,9 +5,10 @@
     "main": "server.js",
     "license": "MIT",
     "dependencies": {
+        "aws-sdk": "^2.480.0",
         "hapi": "^17.6.0",
         "mongoose": "^5.2.13",
-        "rest-hapi": "^1.5.0"
+        "rest-hapi": "^1.6.1"
     },
     "devDependencies": {
         "nodemon": "^1.18.4",
