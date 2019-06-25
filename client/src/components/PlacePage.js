@@ -5,6 +5,8 @@ import { MultiChannelAudioPlayer } from './MultiChannelAudioPlayer';
 
 import axios from 'axios';
 
+import { apiUrl } from '../helpers';
+
 class PlacePage extends Component {
 
   constructor(props) {
@@ -22,7 +24,7 @@ class PlacePage extends Component {
   }
 
   async componentDidMount() {
-    let response = await axios.get("place/"+this.props.place._id, {
+    let response = await axios.get(apiUrl + "/place/"+this.props.place._id, {
         params: {
           $embed: JSON.stringify(["audio1", "audio2", "audio3"])
         }

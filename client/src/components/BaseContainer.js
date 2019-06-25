@@ -5,6 +5,8 @@ import PlacePage from './PlacePage.js'
 
 import axios from 'axios';
 
+import { apiUrl } from '../helpers'
+
 class BaseContainer extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +18,7 @@ class BaseContainer extends Component {
   }
 
   async componentDidMount() {
-    let response = await axios.get("place");
+    let response = await axios.get(apiUrl + "/place");
     this.setState({places: response.data.docs});
   }
 
