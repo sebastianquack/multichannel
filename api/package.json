@@ -5,11 +5,13 @@
     "main": "server.js",
     "license": "MIT",
     "dependencies": {
+        "@hapi/inert": "^5.2.0",
         "aws-sdk": "^2.480.0",
+        "dotenv-safe": "^6.0.0",
         "hapi": "^17.6.0",
         "mongoose": "^5.2.13",
-        "rest-hapi": "^1.6.1",
-        "dotenv-safe": "^6.0.0"
+        "path": "^0.12.7",
+        "rest-hapi": "^1.6.1"
     },
     "devDependencies": {
         "nodemon": "^1.18.4"
