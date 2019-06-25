@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -x
+npm run build
+trash -rf ../api/admin
+mkdir ../api/admin
+mv ./build/* ../api/admin*
+git add ../api/admin
+git commit -m "admin production build"
+cd .. && git subtree push --prefix api heroku master && cd admin
