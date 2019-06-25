@@ -7,4 +7,4 @@ mkdir ../api/admin
 mv ./build/* ../api/admin*
 git add ../api/admin
 git commit -m "admin production build"
-cd .. && git subtree push --prefix api heroku master && cd admin
+cd .. && git subtree push --prefix api heroku-api master && cd admin

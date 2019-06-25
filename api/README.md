@@ -25,3 +25,11 @@ Then, run the server in development mode.
 $ npm run dev
 Hapi server listening on http://localhost:9000, in development mode
 ```
+
+
+
+## Heroku setup
+
+```bash
+$ heroku addons:create mongolab
+```
