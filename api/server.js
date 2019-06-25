@@ -50,7 +50,7 @@ async function api() {
       version: "1.0.0",
       apiPath: 'custom_endpoints',
       mongo: {
-        URI: process.env.MONGO_URL
+        URI: process.env.MONGODB_URI
       }
     };
 
