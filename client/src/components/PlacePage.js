@@ -18,7 +18,7 @@ class PlacePage extends Component {
       loadingStatus: 0,
       tracks: null
     }
-
+ 
     this.updatePlaybackControlStatus = this.updatePlaybackControlStatus.bind(this);
     this.toggleTrack = this.toggleTrack.bind(this);
   }
