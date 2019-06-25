@@ -12,7 +12,7 @@
         "dotenv-safe": "^6.0.0"
     },
     "devDependencies": {
-        "nodemon": "^1.18.4",
+        "nodemon": "^1.18.4"
     },
     "scripts": {
         "dev": "nodemon ./server.js localhost 9000",
