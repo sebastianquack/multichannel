@@ -2,6 +2,10 @@ import { s3Upload, s3Delete } from "./s3.js";
 
 import restHapiProvider from './ra-data-rest-hapi-fixed.js';
 
+//const apiUrl = "http://place-listening.herokuapp.com"
+const apiUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ":" + window.location.port : "");
+console.log(apiUrl);
+
 const extendDataProvider = requestHandler => async (type, resource, params) => {
 
     console.log(type, resource, params);
@@ -34,7 +38,7 @@ const extendDataProvider = requestHandler => async (type, resource, params) => {
     return requestHandler(type, resource, params);
 };
 
-const dataProvider = extendDataProvider(restHapiProvider('http://sebastians-mbp:9000'));
+const dataProvider = extendDataProvider(restHapiProvider(apiUrl));
 
 export { dataProvider }
 

@@ -16,10 +16,8 @@ async function api() {
       routes: {
         files: {
           relativeTo: Path.join(__dirname, 'admin')
-        },
-        cors: true
-      },
-      cors: true
+        }
+      }
     })
 
     await server.register(Inert);
