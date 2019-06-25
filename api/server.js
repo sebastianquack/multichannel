@@ -2,6 +2,8 @@ let Hapi = require('hapi')
 let mongoose = require('mongoose')
 let RestHapi = require('rest-hapi')
 
+let Auth = require("./plugins/auth.plugin.js");
+
 const Path = require('path');
 const Inert = require('@hapi/inert');
 
@@ -15,7 +17,7 @@ async function api() {
       port: process.env.PORT,
       routes: {
         files: {
-          relativeTo: Path.join(__dirname, 'admin')
+          relativeTo: Path.join(__dirname, 'public')
         }
       }
     })
@@ -27,39 +29,63 @@ async function api() {
         path: '/admin/{param*}',
         handler: {
             directory: {
-                path: './index.html',
+                path: './admin',
                 redirectToSlash: true
             }
+        },
+        options: {
+          auth: false
         }
     });
 
     server.route({
         method: 'GET',
-        path: '/static/{param*}',
+        path: '/client/{param*}',
         handler: {
             directory: {
-                path: './static',
+                path: './client',
                 redirectToSlash: true
             }
+        },
+        options: {
+          auth: false
         }
     });
 
+    server.route({
+        method: 'GET',
+        path: '/{param*}',
+        handler: {
+            directory: {
+                path: './client',
+                redirectToSlash: true
+            }
+        },
+        options: {
+          auth: false
+        }
+    });
 
     let config = {
       appTitle: "testresthapi",
       version: "1.0.0",
       apiPath: 'custom_endpoints',
+      authStrategy: Auth.strategy,
       mongo: {
         URI: process.env.MONGODB_URI
       }
     };
 
+    await server.register(Auth);
     await server.register({
       plugin: RestHapi,
       options: {
         mongoose,
         config
       },
+      routes: {
+        prefix: '/api'
+      }
     })
 
     await server.start()

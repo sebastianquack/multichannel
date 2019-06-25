@@ -3,7 +3,7 @@ import { s3Upload, s3Delete } from "./s3.js";
 import restHapiProvider from './ra-data-rest-hapi-fixed.js';
 
 //const apiUrl = "http://place-listening.herokuapp.com"
-const apiUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ":" + window.location.port : "");
+const apiUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ":" + window.location.port : "") + "/api";
 console.log(apiUrl);
 
 const extendDataProvider = requestHandler => async (type, resource, params) => {

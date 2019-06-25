@@ -32,6 +32,7 @@ module.exports = function (mongoose) {
   Schema.statics = {
     collectionName: modelName,
     routeOptions: {
+      readAuth: false,
       associations: {
         audio1: {
           type: "ONE_ONE",

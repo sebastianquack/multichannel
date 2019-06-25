@@ -1,1 +1,1 @@
-export const apiUrl = "https://place-listening-api.herokuapp.com"
+export const apiUrl = "/api"

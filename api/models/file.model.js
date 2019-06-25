@@ -16,7 +16,9 @@ module.exports = function (mongoose) {
   
   Schema.statics = {
     collectionName: modelName,
-    routeOptions: {}
+    routeOptions: {
+      readAuth: false
+    }
   };
   
   return Schema;
