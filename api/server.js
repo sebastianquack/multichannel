@@ -1,7 +1,10 @@
 let Hapi = require('hapi')
 let mongoose = require('mongoose')
 let RestHapi = require('rest-hapi')
-require('dotenv-safe').config()
+
+if(process.env.NODE_ENV != "production") {
+  require('dotenv-safe').config()  
+}
 
 async function api() {
   try {
