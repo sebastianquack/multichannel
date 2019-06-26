@@ -27,16 +27,13 @@ async function api() {
 
     if(process.env.NODE_ENV == "production") {
       server.ext('onRequest', function (request, h) {
-        console.log(request.server.info.protocol);
-        let host = request.headers.host;
-        console.log(host);
-        if(request.server.info.protocol === 'http') {
-          let newUrl = 'https://' + host + (request.url.path || request.url.pathname + request.url.search);
+        if(request.headers['x-forwarded-proto'] != 'https') {
+          let newUrl = 'https://' + request.headers.host + (request.url.path || request.url.pathname + request.url.search);
           console.log(newUrl);
           return h
             .redirect(newUrl)
             .takeover()
-            //.code(301)
+            .code(301)
         }
         else 
           return h.continue; 
