@@ -119,6 +119,10 @@ class MapPage extends Component {
               this.setState({userPosition: pos})
             }, ()=> {
               alert("couldn't get location");
+            }, {
+              enableHighAccuracy: true,
+              timeout: 5000,
+              maximumAge: 0
             });
           } else {
             alert("browser doesn't support location");
