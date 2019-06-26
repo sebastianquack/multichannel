@@ -25,12 +25,20 @@ async function api() {
 
     await server.register(Inert);
 
-    /*if(process.env.NODE_ENV == "production") {
-      await server.register({
-        plugin: require('hapi-require-https'),
-        options: {proxy: false}
-      })
-    }*/
+    if(process.env.NODE_ENV == "production") {
+      server.ext('onRequest', function (request, h) {
+        console.log(request.server.info.protocol);
+        let host = request.headers.host;
+        console.log(host);
+        if(request.server.info.protocol === 'http') 
+          return h
+            .redirect('https://' + host + (request.url.path || request.url.pathname + request.url.search))
+            .takeover()
+            .code(301)
+        else 
+          return h.continue; 
+      });
+    }
 
     server.route({
         method: 'GET',
