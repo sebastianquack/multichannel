@@ -30,11 +30,14 @@ async function api() {
         console.log(request.server.info.protocol);
         let host = request.headers.host;
         console.log(host);
-        if(request.server.info.protocol === 'http') 
+        if(request.server.info.protocol === 'http') {
+          let newUrl = 'https://' + host + (request.url.path || request.url.pathname + request.url.search);
+          console.log(newUrl);
           return h
-            .redirect('https://' + host + (request.url.path || request.url.pathname + request.url.search))
+            .redirect(newUrl)
             .takeover()
-            .code(301)
+            //.code(301)
+        }
         else 
           return h.continue; 
       });
