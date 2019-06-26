@@ -25,12 +25,12 @@ async function api() {
 
     await server.register(Inert);
 
-    if(process.env.NODE_ENV == "production") {
+    /*if(process.env.NODE_ENV == "production") {
       await server.register({
         plugin: require('hapi-require-https'),
         options: {proxy: false}
       })
-    }
+    }*/
 
     server.route({
         method: 'GET',
