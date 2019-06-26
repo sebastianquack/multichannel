@@ -20,8 +20,7 @@ module.exports = function(server, mongoose, logger) {
         auth: false,
         validate: {
           payload: {
-            email: Joi.string()
-              .email()
+            username: Joi.string()
               .lowercase()
               .required(),
             password: Joi.string().required()
@@ -49,13 +48,13 @@ module.exports = function(server, mongoose, logger) {
       let response = {};
 
       let user = await User.findByCredentials(
-        request.payload.email,
+        request.payload.username,
         request.payload.password,
         Log
       );
 
       if (!user) {
-        throw Boom.unauthorized("Invalid Email or Password.");
+        throw Boom.unauthorized("Invalid Username or Password.");
       }
 
       delete user.password;
@@ -78,8 +77,7 @@ module.exports = function(server, mongoose, logger) {
         auth: false,
         validate: {
           payload: {
-            email: Joi.string()
-              .email()
+            username: Joi.string()
               .lowercase()
               .required(),
             password: Joi.string().required()

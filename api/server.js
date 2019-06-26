@@ -95,11 +95,11 @@ async function api() {
     console.log(userModel);
 
     let Log = RestHapi.getLogger('seed')
-    let adminUser = await RestHapi.list(userModel, {$where: {email: "sebastianquack@gmail.com"}}, Log)
+    let adminUser = await RestHapi.list(userModel, {$where: {username: "admin"}}, Log)
     console.log(adminUser);
     if(adminUser.docs.length == 0) {
       Log.log('seeding admin user')
-      RestHapi.create(userModel, {email: "sebastianquack@gmail.com", password: process.env.ADMIN_PASSWORD}, Log)  
+      RestHapi.create(userModel, {username: "admin", password: process.env.ADMIN_PASSWORD}, Log)  
     }
     
     console.log("Server ready", server.info)

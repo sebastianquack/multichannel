@@ -1,4 +1,8 @@
-const jwtSecret = "NeverShareYourSecret";
+if(process.env.NODE_ENV != "production") {
+  require('dotenv-safe').config()  
+}
+
+const jwtSecret = process.env.JWT_SECRET;
 const strategy = "jwt";
 
 module.exports = {
@@ -42,7 +46,7 @@ function createToken(user) {
 
   token = Jwt.sign({ user: { email, _id } }, jwtSecret, {
     algorithm: "HS256",
-    expiresIn: "1m"
+    expiresIn: "30m"
   });
 
   return token;

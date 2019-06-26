@@ -4,7 +4,7 @@ module.exports = function(mongoose) {
   let modelName = "user";
   let Types = mongoose.Schema.Types;
   let Schema = new mongoose.Schema({
-    email: {
+    username: {
       type: Types.String,
       unique: true
     },
@@ -39,11 +39,11 @@ module.exports = function(mongoose) {
       return hash;
     },
 
-    findByCredentials: async function(email, password) {
+    findByCredentials: async function(username, password) {
       const self = this;
 
       const query = {
-        email: email.toLowerCase()
+        username: username.toLowerCase()
       };
 
       let mongooseQuery = self.findOne(query);
