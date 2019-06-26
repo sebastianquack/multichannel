@@ -90,6 +90,18 @@ async function api() {
 
     await server.start()
 
+    let userRoutes = server.table().filter(t=>t.path == "/api/user");
+    let userModel = userRoutes[0].settings.plugins.model;
+    console.log(userModel);
+
+    let Log = RestHapi.getLogger('seed')
+    let adminUser = await RestHapi.list(userModel, {$where: {email: "sebastianquack@gmail.com"}}, Log)
+    console.log(adminUser);
+    if(adminUser.docs.length == 0) {
+      Log.log('seeding admin user')
+      RestHapi.create(userModel, {email: "sebastianquack@gmail.com", password: process.env.ADMIN_PASSWORD}, Log)  
+    }
+    
     console.log("Server ready", server.info)
 
     return server

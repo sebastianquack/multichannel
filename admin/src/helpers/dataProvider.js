@@ -1,10 +1,20 @@
 import { s3Upload, s3Delete } from "./s3.js";
+import { fetchUtils } from 'react-admin';
 
 import restHapiProvider from './ra-data-rest-hapi-fixed.js';
 
 //const apiUrl = "http://place-listening.herokuapp.com"
 const apiUrl = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ":" + window.location.port : "") + "/api";
 console.log(apiUrl);
+
+const httpClient = (url, options = {}) => {
+    if (!options.headers) {
+        options.headers = new Headers({ Accept: 'application/json' });
+    }
+    const token = localStorage.getItem('token');
+    options.headers.set('authorization', `${token}`);
+    return fetchUtils.fetchJson(url, options);
+}
 
 const extendDataProvider = requestHandler => async (type, resource, params) => {
 
@@ -38,7 +48,7 @@ const extendDataProvider = requestHandler => async (type, resource, params) => {
     return requestHandler(type, resource, params);
 };
 
-const dataProvider = extendDataProvider(restHapiProvider(apiUrl));
+const dataProvider = extendDataProvider(restHapiProvider(apiUrl, httpClient));
 
 export { dataProvider }
 

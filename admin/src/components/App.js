@@ -19,6 +19,7 @@ import {
 } from 'react-admin';
 
 import { dataProvider } from '../helpers/dataProvider.js';
+import authProvider from '../helpers/authProvider';
 
 import LocationInput from './LocationInput.js';
 
@@ -95,7 +96,7 @@ const FileCreate = props =>
   </Create>
 
 const App = () => 
-  <Admin dataProvider={dataProvider}>
+  <Admin dataProvider={dataProvider} authProvider={authProvider}>
     <Resource name="translation" list={ListGuesser} edit={TranslationEdit} create={TranslationCreate}/>
     <Resource name="place" list={PlaceList} edit={PlaceEdit} create={PlaceCreate}/>
     <Resource name="file" list={FileList} edit={FileEdit} create={FileCreate}/>
