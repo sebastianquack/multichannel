@@ -46,7 +46,7 @@ function createToken(user) {
 
   token = Jwt.sign({ user: { email, _id } }, jwtSecret, {
     algorithm: "HS256",
-    expiresIn: "30m"
+    expiresIn: "60 days"
   });
 
   return token;

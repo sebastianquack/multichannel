@@ -15,7 +15,8 @@ import {
   FileInput, 
   FileField,
   ReferenceInput,
-  SelectInput   
+  SelectInput,
+  LongTextInput   
 } from 'react-admin';
 
 import { dataProvider } from '../helpers/dataProvider.js';
@@ -32,16 +33,34 @@ const TranslationForm =
 const TranslationEdit = props => <Edit {...props}>{TranslationForm}</Edit>;
 const TranslationCreate = props => <Create {...props}>{TranslationForm}</Create>;
 
+const ConfigForm = 
+    <SimpleForm>
+        <TextInput source="key" />
+        <SelectInput source="type" choices={[
+          { id: 'text', name: 'Text' },
+          { id: 'number', name: 'Number' },
+        ]} />
+        <TextInput source="value" />
+    </SimpleForm>
+const ConfigEdit = props => <Edit {...props}>{ConfigForm}</Edit>;
+const ConfigCreate = props => <Create {...props}>{ConfigForm}</Create>;
+
 const PlaceList = props =>
   <List {...props}>
     <Datagrid rowClick="edit">
         <TextField source="name" />
+        <TextField source="locale" />
     </Datagrid>
   </List>;
 
 const PlaceForm = 
     <SimpleForm>
         <TextInput source="name" />
+        <LongTextInput source="description" />
+        <SelectInput source="locale" choices={[
+          { id: 'en', name: 'en' },
+          { id: 'no', name: 'no' },
+        ]} />
         
         <LocationInput/>
         
@@ -97,9 +116,10 @@ const FileCreate = props =>
 
 const App = () => 
   <Admin dataProvider={dataProvider} authProvider={authProvider}>
-    <Resource name="translation" list={ListGuesser} edit={TranslationEdit} create={TranslationCreate}/>
     <Resource name="place" list={PlaceList} edit={PlaceEdit} create={PlaceCreate}/>
     <Resource name="file" list={FileList} edit={FileEdit} create={FileCreate}/>
+    <Resource name="translation" list={ListGuesser} edit={TranslationEdit} create={TranslationCreate}/>
+    <Resource name="config" list={ListGuesser} edit={ConfigEdit} create={ConfigCreate}/>
   </Admin>
 
 export default App;

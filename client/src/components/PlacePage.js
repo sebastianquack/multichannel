@@ -63,7 +63,9 @@ class PlacePage extends Component {
     return <div>
       <PlacePageContainer>
 
-        <div>place page: {this.state.place ? this.state.place.name : "loading..."}</div>
+        <h2>{this.state.place ? this.state.place.name : "loading..."}</h2>
+
+        <p>{this.state.place ? this.state.place.description : "loading..."}</p>
 
         {this.state.tracks && <MultiChannelAudioPlayer 
           playbackControlStatus={this.state.playbackControlStatus}
@@ -77,7 +79,7 @@ class PlacePage extends Component {
         {this.state.playbackControlStatus != "loading" && trackButtons}
 
       </PlacePageContainer>
-      <ExitButton onClick={this.props.exitPlace}>❎ leave</ExitButton>
+      <ExitButton onClick={this.props.exitPlace}>❎</ExitButton>
 
     </div>
   }

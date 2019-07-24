@@ -6,15 +6,13 @@ import Circle from 'react-google-maps/lib/components/Circle';
 
 import styled from 'styled-components'
 
+import axios from 'axios';
+import { apiUrl, getConfig } from '../helpers';
+
 /* Create map with withGoogleMap HOC */
 /* https://github.com/tomchentw/react-google-maps */
 
 /* Default configuration */
-const DEFAULT_ZOOM = 15;
-const defaultPosition = {
-  lat: 27.9878,
-  lng: 86.9250
-};
 const DEFAULT_RADIUS = 250;
 /* Circle options */
 // https://developers.google.com/maps/documentation/javascript/3.exp/reference#CircleOptions
@@ -39,11 +37,11 @@ const Map = withGoogleMap((props) => {
   };
 
   const markers = places.map((p, index)=>
-    <Marker
+    (p.locale == props.locale ? <Marker
       key={index}
       position={{lat: p.lat, lng: p.lon}}
       onClick={()=>{props.openPlace(p)}}
-    />
+    /> : null)
   )
 
   const circle = 
@@ -68,7 +66,7 @@ const Map = withGoogleMap((props) => {
 
 const PlaceEntry = props => 
   <PlaceLi onClick={props.onClick}>
-    {props.place.name}
+    {props.place.name_en}
   </PlaceLi>
 
 class MapPage extends Component {
@@ -77,8 +75,19 @@ class MapPage extends Component {
     super(props);
 
     this.state = {
-      userPosition: null
+      userPosition: null,
     }
+  }
+
+  async componentDidMount() {
+    let response = await axios.get(apiUrl + "/config");
+    this.setState({
+      defaultPosition: {
+        lat: getConfig(response.data, "base_lat"),
+        lng: getConfig(response.data, "base_lon")
+      },
+      defaultZoom: getConfig(response.data, "base_zoom")
+    });
   }
 
   render () {
@@ -90,19 +99,22 @@ class MapPage extends Component {
       />
     ) : "loading..."
 
+    console.log(this.props.places);
+
     return <MapContainer visible={this.props.visible}>
       
-      <Map
+      {this.state.defaultPosition && <Map
         containerElement={ <div style={ {height: '100%'} } /> }
-        mapElement={ <div style={ {height: '400px'} } /> }
-        position={this.state.userPosition ? this.state.userPosition : defaultPosition}
+        mapElement={ <div style={ {height: '100vh'} } /> }
+        position={this.state.userPosition ? this.state.userPosition : this.state.defaultPosition}
         userPosition={this.state.userPosition}
-        defaultZoom={DEFAULT_ZOOM}
+        defaultZoom={this.state.defaultZoom}
         places={this.props.places}
         openPlace={this.props.openPlace}
-      />
+        locale={this.props.locale}
+      />}
 
-      <ul>{placeEntries}</ul>
+      {/*<ul>{placeEntries}</ul>*/}
 
       <LocateButton src="/images/locate.png" 
         onClick={()=>{
@@ -155,7 +167,7 @@ const LocateButton = styled.img`
   width: 30px;
   height: 30px;
   right: 10px;
-  top: 220px;
+  bottom: 120px;
   padding: 5px;
   box-shadow: 2px 2px #ddd;
   border-radius: 2px;

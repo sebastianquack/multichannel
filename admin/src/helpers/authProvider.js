@@ -37,7 +37,8 @@ export default (type, params) => {
     }
 
     if (type === AUTH_CHECK) {
-        return localStorage.getItem('token') ? Promise.resolve() : Promise.reject();
+      console.log("auth check", localStorage.getItem('token'));
+      return localStorage.getItem('token') ? Promise.resolve() : Promise.reject();
     }
 
 

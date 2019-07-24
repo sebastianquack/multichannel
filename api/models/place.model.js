@@ -7,6 +7,14 @@ module.exports = function (mongoose) {
       required: true,
       unique: false
     },
+    locale: {
+      type: Types.String,
+      unique: false
+    },
+    description: {
+      type: Types.String,
+      unique: false
+    },
     lat: {
       type: Types.Number,
       unique: true
